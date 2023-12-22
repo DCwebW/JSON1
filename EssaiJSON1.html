@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    
+
+    async function GetUsers(){
+        const reponse = await fetch (`https://jsonplaceholder.typicode.com/users`)
+        const data = await reponse.json();
+        return data
+        
+
+        
+    
+    }
+    async function afficherUsers(){
+        const Users = await GetUsers();
+        console.log(Users)
+
+    const ListeNoms = document.getElementById("Liste")
+    let numéro = 1
+        Users.forEach(user => {
+            
+            const utilisateur= document.createElement('li')
+            utilisateur.innerText= "client "+ numéro +" : " + user["name"]+"\n"+ user["username"]
+            utilisateur.classList.add("grid")
+            
+            const utilisateur2 = document.createElement('p')
+                 const MajU = user.address.city.toUpperCase()
+                
+                utilisateur2.innerText=MajU
+          
+         
+           
+            ListeNoms.appendChild(utilisateur)
+            utilisateur.appendChild(utilisateur2)
+            numéro++
+            
+        });
+
+    
+
+    
+    
+
+
+   }
+
+   afficherUsers()
+        
+        
+  
+    
+
+</script>
+<style>
+    #Liste{
+        display: grid;
+        grid-template-columns:300px repeat(auto-fit,minmax(300px , 1fr));
+        
+        gap: 20px
+    
+    }
+   .grid {
+        background: violet;
+        border-radius: 15px;
+        box-shadow: 1px 1px black;
+        padding-top: 20px;
+        list-style-type: none;}
+    
+
+
+</style>
+<body>
+    <ul id="Liste">
+
+    </ul>
+    
+</body>
+
+</html>
